@@ -1,6 +1,7 @@
 package com.ms.square.android.expandabletextview.sample;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,11 +9,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -139,22 +142,30 @@ public class DemoActivity extends AppCompatActivity {
 
     public static class Demo1Fragment extends Fragment {
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+        public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_demo1, container, false);
 
             ((TextView) rootView.findViewById(R.id.sample1).findViewById(R.id.title)).setText("Sample 1");
             ((TextView) rootView.findViewById(R.id.sample2).findViewById(R.id.title)).setText("Sample 2");
 
-            ExpandableTextView expTv1 = (ExpandableTextView) rootView.findViewById(R.id.sample1)
+            final ExpandableTextView expTv1 = rootView.findViewById(R.id.sample1)
                     .findViewById(R.id.expand_text_view);
-            ExpandableTextView expTv2 = (ExpandableTextView) rootView.findViewById(R.id.sample2)
+            ExpandableTextView expTv2 = rootView.findViewById(R.id.sample2)
                     .findViewById(R.id.expand_text_view);
+//            final ImageButton btnDefault = rootView.findViewById(R.id.sample1).findViewById(R.id.expand_collapse);
+//            btnDefault.setVisibility(View.GONE);
+            final View shadow = rootView.findViewById(R.id.sample1).findViewById(R.id.shadow);
 
             expTv1.setOnExpandStateChangeListener(new ExpandableTextView.OnExpandStateChangeListener() {
                 @Override
                 public void onExpandStateChanged(TextView textView, boolean isExpanded) {
                     Toast.makeText(getActivity(), isExpanded ? "Expanded" : "Collapsed", Toast.LENGTH_SHORT).show();
+//                    btnDefault.setVisibility(View.GONE);
+//                    btnExpand.setText(
+//                            isExpanded ? "Collapse" : "Expand"
+//                    );
+                    shadow.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
                 }
             });
 

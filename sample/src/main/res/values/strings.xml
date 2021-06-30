@@ -9,4 +9,7 @@
     <string name="title_demo1">In ScrollView</string>
     <string name="title_demo2">In ListView</string>
 
+    <string name="expand">Expand</string>
+    <string name="collapse">Collapse</string>
+
 </resources>
